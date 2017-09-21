@@ -14,12 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Method;
-
-import static android.support.v7.widget.helper.ItemTouchHelper.ACTION_STATE_IDLE;
-
 public class DeckAdapater extends RecyclerView.Adapter<DeckViewHolder> {
     private Context mContext;
     private RecyclerView mRecyclerView;
@@ -62,9 +56,10 @@ public class DeckAdapater extends RecyclerView.Adapter<DeckViewHolder> {
             holder.textlayout.setVisibility(View.GONE);
             holder.cardImage.setVisibility(View.VISIBLE);
             holder.numText.setVisibility(View.VISIBLE);
-            if(TextUtils.isEmpty(holder.numText.getText())) {
-                holder.numText.setText("" + position);
+            if (TextUtils.isEmpty(holder.numText.getText())) {
+                holder.numText.setText(""+position);
             }
+
             if (mHeight <= 0) {
                 makeHeight();
             }
@@ -329,6 +324,9 @@ public class DeckAdapater extends RecyclerView.Adapter<DeckViewHolder> {
         @Override
         public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
             super.onSelectedChanged(viewHolder, actionState);
+            if(actionState == ItemTouchHelper.ACTION_STATE_IDLE){
+                //
+            }
         }
 
         @Override

@@ -17,6 +17,12 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mDeckAdapater = new DeckAdapater(this, mRecyclerView);
         mRecyclerView.setAdapter(mDeckAdapater);
+        findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeckAdapater.notifyDataSetChanged();
+            }
+        });
         findViewById(R.id.main1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

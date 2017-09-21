@@ -4028,6 +4028,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             } else {
                 holder.offsetPosition(inBetweenOffset, false);
             }
+            holder.addFlags(ViewHolder.FLAG_MOVED);
 
             mState.mStructureChanged = true;
         }
@@ -10487,11 +10488,15 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         }
 
         boolean needsUpdate() {
-            return (mFlags & FLAG_UPDATE) != 0;
+            return (mFlags & FLAG_UPDATE) != 0 ;
         }
 
         boolean isBound() {
             return (mFlags & FLAG_BOUND) != 0;
+        }
+
+        boolean isMoved(){
+            return (mFlags & FLAG_MOVED) != 0;
         }
 
         boolean isRemoved() {
@@ -10841,7 +10846,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
          * @return true if the item the view corresponds to was changed in the data set
          */
         public boolean isItemChanged() {
-            return mViewHolder.isUpdated();
+            return mViewHolder.isUpdated()||  mViewHolder.isMoved();
         }
 
         /**
