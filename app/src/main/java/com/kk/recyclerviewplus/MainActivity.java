@@ -6,65 +6,67 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper2;
 import android.view.View;
 
+import com.kk.recyclerviewplus.cards.DeckAdapter;
+
 public class MainActivity extends Activity implements ItemTouchHelper2.OnDragListner {
     private RecyclerView mRecyclerView;
-    private DeckAdapater mDeckAdapater;
+    private DeckAdapter mDeckAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        mDeckAdapater = new DeckAdapater(this, mRecyclerView);
-        mRecyclerView.setAdapter(mDeckAdapater);
+        mDeckAdapter = new DeckAdapter(this, mRecyclerView);
+        mRecyclerView.setAdapter(mDeckAdapter);
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.main1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setMainCount(mDeckAdapater.getMainCount() + 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setMainCount(mDeckAdapter.getMainCount() + 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.main2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setMainCount(mDeckAdapater.getMainCount() - 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setMainCount(mDeckAdapter.getMainCount() - 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
 
         findViewById(R.id.extra1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setExtraCount(mDeckAdapater.getExtraCount() + 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraCount() + 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.extra2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setExtraCount(mDeckAdapater.getExtraCount() - 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraCount() - 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
 
         findViewById(R.id.side1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setSideCount(mDeckAdapater.getSideCount() + 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setSideCount(mDeckAdapter.getSideCount() + 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.side2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapater.setSideCount(mDeckAdapater.getSideCount() - 1);
-                mDeckAdapater.notifyDataSetChanged();
+                mDeckAdapter.setSideCount(mDeckAdapter.getSideCount() - 1);
+                mDeckAdapter.notifyDataSetChanged();
             }
         });
     }
