@@ -34,14 +34,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="+main"/>
+                android:text="main+1"/>
 
             <Button
                 android:id="@+id/main2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-main"/>
+                android:text="main-1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -54,14 +54,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="+extra"/>
+                android:text="extra+1"/>
 
             <Button
                 android:id="@+id/extra2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-extra"/>
+                android:text="extra-1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -74,14 +74,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="+side"/>
+                android:text="side+1"/>
 
             <Button
                 android:id="@+id/side2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-side"/>
+                android:text="side-1"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

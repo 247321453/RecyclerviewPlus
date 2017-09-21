@@ -51,13 +51,20 @@ public class DeckAdapater extends RecyclerView.Adapter<DeckViewHolder> {
             holder.textlayout.setVisibility(View.VISIBLE);
             holder.cardImage.setVisibility(View.GONE);
             holder.numText.setVisibility(View.GONE);
+            if (position == getMainLabel()) {
+                holder.labelText.setText("main");
+            } else if (position == getExtraLabel()) {
+                holder.labelText.setText("extra");
+            } else if (position == getSideLabel()) {
+                holder.labelText.setText("side");
+            }
             holder.setSize(-1, -1);
         } else {
             holder.textlayout.setVisibility(View.GONE);
             holder.cardImage.setVisibility(View.VISIBLE);
             holder.numText.setVisibility(View.VISIBLE);
             if (TextUtils.isEmpty(holder.numText.getText())) {
-                holder.numText.setText(""+position);
+                holder.numText.setText("" + position);
             }
 
             if (mHeight <= 0) {
@@ -324,7 +331,7 @@ public class DeckAdapater extends RecyclerView.Adapter<DeckViewHolder> {
         @Override
         public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
             super.onSelectedChanged(viewHolder, actionState);
-            if(actionState == ItemTouchHelper.ACTION_STATE_IDLE){
+            if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
                 //
             }
         }
