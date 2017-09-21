@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.v7.widget.helper.ItemTouchHelper2;
+import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends Activity implements ItemTouchHelper2.OnDragListner {
@@ -43,8 +44,18 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
                 } else if (DeckItemUtils.isSide(position)) {
                     position = position - DeckAdapater.SideStart;
                 }
-                if (position % DeckAdapater.LINE_COUNT != 0) {
-                    outRect.left = -((mDeckAdapater.LINE_COUNT - 10) * mDeckAdapater.getWidth() / (mDeckAdapater.LINE_COUNT - 1));
+                int w = mDeckAdapater.getMaxWidth() / 10 - mDeckAdapater.getMaxWidth() / 15;
+                int w2 = w / (mDeckAdapater.LINE_COUNT - 1);
+                if (position % DeckAdapater.LINE_COUNT == 0) {
+                    outRect.left = 0;
+//                } else if (position % DeckAdapater.LINE_COUNT == (mDeckAdapater.LINE_COUNT - 1)) {
+//                    outRect.left = -w;
+//                    Log.d("kk", "l=" + outRect.left);
+//                } else if (position % DeckAdapater.LINE_COUNT == 1) {
+//                    outRect.left = -(int) Math.ceil((w / 3.0f));
+                } else {
+                    outRect.left = -(w2 * position % DeckAdapater.LINE_COUNT);
+                    Log.d("kk", "m=" + outRect.left);
                 }
 //                super.getItemOffsets(outRect, view, parent, state);
             }
