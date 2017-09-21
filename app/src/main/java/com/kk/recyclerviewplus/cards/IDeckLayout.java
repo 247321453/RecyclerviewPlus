@@ -35,5 +35,7 @@ public interface IDeckLayout {
 
     int getLineLimitCount();
 
+    int getLineCardCount();
+
     boolean moveItem(int fromPosition, int toPosition);
 }

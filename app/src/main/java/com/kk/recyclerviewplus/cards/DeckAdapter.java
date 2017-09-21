@@ -18,6 +18,7 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
     private int mWidth;
     private int mHeight;
     private int mMainCount = 60, mExtraCount = 15, mSideCount = 15;
+    private int mPWidth;
 
     public DeckAdapter(Context context, RecyclerView recyclerView) {
         mContext = context;
@@ -54,9 +55,12 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
 
     @Override
     public int getMaxWidth() {
-        return mRecyclerView.getMeasuredWidth()
-                - mRecyclerView.getPaddingRight()
-                - mRecyclerView.getPaddingLeft();
+        if (mPWidth == 0) {
+            mPWidth = mRecyclerView.getMeasuredWidth()
+                    - mRecyclerView.getPaddingRight()
+                    - mRecyclerView.getPaddingLeft();
+        }
+        return mPWidth;
     }
 
     @Override
@@ -125,12 +129,12 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
 
     @Override
     public int getExtraLimit() {
-        return Math.max(10, getExtraCount());
+        return Math.max(getLineCardCount(), getExtraCount());
     }
 
     @Override
     public int getSideLimit() {
-        return Math.max(10, getSideCount());
+        return Math.max(getLineCardCount(), getSideCount());
     }
 
     //endregion
@@ -218,6 +222,10 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
         return getMainCount() + getExtraCount() + getSideCount() + 3;
     }
 
+    @Override
+    public int getLineCardCount() {
+        return 10;
+    }
 
     @Override
     public void onBindViewHolder(DeckViewHolder holder, int position) {
