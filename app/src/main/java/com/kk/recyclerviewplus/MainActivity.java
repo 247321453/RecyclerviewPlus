@@ -1,13 +1,9 @@
 package com.kk.recyclerviewplus;
 
 import android.app.Activity;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.v7.widget.helper.ItemTouchHelper2;
-import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends Activity implements ItemTouchHelper2.OnDragListner {
@@ -19,86 +15,52 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        mRecyclerView.setAdapter((mDeckAdapater = new DeckAdapater(this, mRecyclerView)));
-        mRecyclerView.setLayoutManager(new DeckLayoutManager(this, DeckAdapater.LINE_COUNT, new GridLayoutManager.SpanSizeLookup() {
+        mDeckAdapater = new DeckAdapater(this, mRecyclerView);
+        mRecyclerView.setAdapter(mDeckAdapater);
+        findViewById(R.id.main1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getSpanSize(int position) {
-                if (DeckItemUtils.isLabel(position)) {
-                    return DeckAdapater.LINE_COUNT;
-                }
-                return 1;
-            }
-        }));
-        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                if (DeckItemUtils.isLabel(position)) {
-                    super.getItemOffsets(outRect, view, parent, state);
-                    return;
-                }
-                if (DeckItemUtils.isMain(position)) {
-                    position = position - DeckAdapater.MainStart;
-                } else if (DeckItemUtils.isExtra(position)) {
-                    position = position - DeckAdapater.ExtraStart;
-                } else if (DeckItemUtils.isSide(position)) {
-                    position = position - DeckAdapater.SideStart;
-                }
-                int w = mDeckAdapater.getMaxWidth() / 10 - mDeckAdapater.getMaxWidth() / 15;
-                int w2 = w / (mDeckAdapater.LINE_COUNT - 1);
-                if (position % DeckAdapater.LINE_COUNT == 0) {
-                    outRect.left = 0;
-//                } else if (position % DeckAdapater.LINE_COUNT == (mDeckAdapater.LINE_COUNT - 1)) {
-//                    outRect.left = -w;
-//                    Log.d("kk", "l=" + outRect.left);
-//                } else if (position % DeckAdapater.LINE_COUNT == 1) {
-//                    outRect.left = -(int) Math.ceil((w / 3.0f));
-                } else {
-                    outRect.left = -(w2 * position % DeckAdapater.LINE_COUNT);
-                    Log.d("kk", "m=" + outRect.left);
-                }
-//                super.getItemOffsets(outRect, view, parent, state);
+            public void onClick(View v) {
+                mDeckAdapater.setMainCount(mDeckAdapater.getMainCount() + 1);
+                mDeckAdapater.notifyDataSetChanged();
             }
         });
-        ItemTouchHelper2 touchHelper = new ItemTouchHelper2(this, new ItemTouchHelper2.Callback() {
+        findViewById(R.id.main2).setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                int id = viewHolder.getAdapterPosition();
-                if (DeckItemUtils.isLabel(id)) {
-                    return makeMovementFlags(0, 0);
-                }
-                int dragFlags;
-                if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
-                    dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
-                } else {
-                    dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-                }
-                return makeMovementFlags(dragFlags, 0);
-            }
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                int id = target.getAdapterPosition();
-                int src = viewHolder.getAdapterPosition();
-                if (DeckItemUtils.isLabel(id)) {
-                    return false;
-                }
-                if ((DeckItemUtils.isMain(id) && DeckItemUtils.isMain(src))
-                        || (DeckItemUtils.isExtra(id) && DeckItemUtils.isExtra(src))
-                        || (DeckItemUtils.isSide(id) && DeckItemUtils.isSide(src))) {
-                    mDeckAdapater.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
+            public void onClick(View v) {
+                mDeckAdapater.setMainCount(mDeckAdapater.getMainCount() - 1);
+                mDeckAdapater.notifyDataSetChanged();
             }
         });
-        touchHelper.setEnableClickDrag(true);
-        touchHelper.attachToRecyclerView(mRecyclerView);
+
+        findViewById(R.id.extra1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeckAdapater.setExtraCount(mDeckAdapater.getExtraCount() + 1);
+                mDeckAdapater.notifyDataSetChanged();
+            }
+        });
+        findViewById(R.id.extra2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeckAdapater.setExtraCount(mDeckAdapater.getExtraCount() - 1);
+                mDeckAdapater.notifyDataSetChanged();
+            }
+        });
+
+        findViewById(R.id.side1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeckAdapater.setSideCount(mDeckAdapater.getSideCount() + 1);
+                mDeckAdapater.notifyDataSetChanged();
+            }
+        });
+        findViewById(R.id.side2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeckAdapater.setSideCount(mDeckAdapater.getSideCount() - 1);
+                mDeckAdapater.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
