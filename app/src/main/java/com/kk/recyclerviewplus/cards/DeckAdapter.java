@@ -100,6 +100,10 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
 
     @Override
     public int getExtraCount() {
+        return Math.max(1, mExtraCount);
+    }
+
+    public int getExtraRealCount() {
         return mExtraCount;
     }
 
@@ -114,6 +118,10 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
 
     @Override
     public int getSideCount() {
+        return Math.max(1, mSideCount);
+    }
+
+    public int getSideRealCount() {
         return mSideCount;
     }
 
@@ -255,8 +263,18 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
             }
             holder.setSize(mWidth, mHeight);
             if (isMain(position)) {
-                position = position - getMainStart();
+                position = getMainIndex(position);
                 if (position >= getMainRealCount()) {
+                    holder.empty();
+                }
+            } else if (isExtra(position)) {
+                position = getExtraIndex(position);
+                if (position >= getExtraRealCount()) {
+                    holder.empty();
+                }
+            } else if (isSide(position)) {
+                position = getSideIndex(position);
+                if (position >= getSideRealCount()) {
                     holder.empty();
                 }
             }

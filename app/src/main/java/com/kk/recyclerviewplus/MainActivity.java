@@ -43,14 +43,14 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         findViewById(R.id.extra1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraCount() + 1);
+                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraRealCount() + 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.extra2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraCount() - 1);
+                mDeckAdapter.setExtraCount(mDeckAdapter.getExtraRealCount() - 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });
@@ -58,14 +58,14 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         findViewById(R.id.side1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setSideCount(mDeckAdapter.getSideCount() + 1);
+                mDeckAdapter.setSideCount(mDeckAdapter.getSideRealCount() + 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.side2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setSideCount(mDeckAdapter.getSideCount() - 1);
+                mDeckAdapter.setSideCount(mDeckAdapter.getSideRealCount() - 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });

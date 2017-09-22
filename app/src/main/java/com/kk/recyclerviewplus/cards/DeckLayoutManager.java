@@ -17,6 +17,15 @@ class DeckLayoutManager extends GridLayoutManager {
                     if (position % limit == (limit - 1)) {
                         return span - limit + 1;
                     }
+                } else if (deckAdapter.isExtra(position)) {
+                    position = deckAdapter.getExtraIndex(position);
+                    if (deckAdapter.getExtraCount() < deckAdapter.getLineCardCount()) {
+                        if (position == deckAdapter.getExtraCount() - 1) {
+                            return deckAdapter.getLineCardCount() - position;
+                        }
+                    }
+                } else if (deckAdapter.isSide(position)) {
+
                 }
                 return 1;
             }
