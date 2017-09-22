@@ -82,7 +82,11 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
     //region count/limit
     @Override
     public int getMainCount() {
-        return Math.max(40, mMainCount);
+        return Math.max(31, mMainCount);
+    }
+
+    public int getMainRealCount() {
+        return mMainCount;
     }
 
     public void setMainCount(int mainCount) {
@@ -124,7 +128,7 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
 
     @Override
     public int getMainLimit() {
-        return (int) Math.ceil(getMainCount() / 4.0f);
+        return Math.max(10, (int) Math.ceil(getMainCount() / 4.0f));
     }
 
     @Override
@@ -245,18 +249,15 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
             holder.textLayout.setVisibility(View.GONE);
             holder.cardImage.setVisibility(View.VISIBLE);
             holder.numText.setVisibility(View.VISIBLE);
-            if (TextUtils.isEmpty(holder.numText.getText())) {
-                holder.numText.setText("" + position);
-            }
-
+            holder.numText.setText("" + position);
             if (mHeight <= 0) {
                 makeHeight();
             }
             holder.setSize(mWidth, mHeight);
             if (isMain(position)) {
                 position = position - getMainStart();
-                if (position >= getMainCount()) {
-                    holder.cardImage.setVisibility(View.INVISIBLE);
+                if (position >= getMainRealCount()) {
+                    holder.empty();
                 }
             }
         }
@@ -267,6 +268,10 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
     public boolean moveItem(int from, int to) {
         if (isMain(from)) {
             if (isMain(to)) {
+                int pos = getMainIndex(to);
+                if (pos >= getMainRealCount()) {
+                    to = getMainRealCount() - 1 + getMainStart();
+                }
                 notifyItemMoved(from, to);
                 return true;
             }
@@ -294,6 +299,10 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
             }
             if (isMain(to)) {
                 //TODO check main
+                int pos = getMainIndex(to);
+                if (pos >= getMainRealCount()) {
+                    to = getMainRealCount() - 1 + getMainStart();
+                }
                 return false;
             }
         }

@@ -28,14 +28,14 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         findViewById(R.id.main1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setMainCount(mDeckAdapter.getMainCount() + 1);
+                mDeckAdapter.setMainCount(mDeckAdapter.getMainRealCount() + 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });
         findViewById(R.id.main2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDeckAdapter.setMainCount(mDeckAdapter.getMainCount() - 1);
+                mDeckAdapter.setMainCount(mDeckAdapter.getMainRealCount() - 1);
                 mDeckAdapter.notifyDataSetChanged();
             }
         });

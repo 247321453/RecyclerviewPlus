@@ -43,6 +43,11 @@ class DeckViewHolder extends RecyclerView.ViewHolder {
         view.setLayoutParams(layoutParams);
     }
 
+    public void empty(){
+        numText.setVisibility(View.INVISIBLE);
+        cardImage.setVisibility(View.INVISIBLE);
+    }
+
     private final View view;
     final View textLayout;
     final TextView labelText, numText;
