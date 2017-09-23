@@ -3,12 +3,13 @@ package com.kk.recyclerviewplus;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper2;
+import android.support.v7.widget.helper.OnItemDragListener;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kk.recyclerviewplus.cards.DeckAdapter;
 
-public class MainActivity extends Activity implements ItemTouchHelper2.OnDragListner {
+public class MainActivity extends Activity implements OnItemDragListener {
     private RecyclerView mRecyclerView;
     private DeckAdapter mDeckAdapter;
 
@@ -17,7 +18,7 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        mDeckAdapter = new DeckAdapter(this, mRecyclerView);
+        mDeckAdapter = new DeckAdapter(this, mRecyclerView, this);
         mRecyclerView.setAdapter(mDeckAdapter);
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +79,7 @@ public class MainActivity extends Activity implements ItemTouchHelper2.OnDragLis
 
     @Override
     public void onDragLongPress(int pos) {
-
+        Toast.makeText(this, "on long press :" + pos, Toast.LENGTH_SHORT).show();
     }
 
     @Override

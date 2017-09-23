@@ -1,9 +1,9 @@
 package com.kk.recyclerviewplus.cards;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.GridLayoutManagerPlus;
 
-class DeckLayoutManager extends GridLayoutManager {
+class DeckLayoutManager extends GridLayoutManagerPlus {
     DeckLayoutManager(Context context, final int span, final IDeckLayout deckAdapter) {
         super(context, span);
         setSpanSizeLookup(new SpanSizeLookup() {

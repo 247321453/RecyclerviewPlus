@@ -3,9 +3,9 @@ package com.kk.recyclerviewplus.cards;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.support.v7.widget.helper.ItemTouchHelper2;
+import android.support.v7.widget.helper.ItemTouchHelperPlus;
 
-class DeckHelperCallback extends ItemTouchHelper2.Callback {
+class DeckHelperCallback extends ItemTouchHelperPlus.Callback {
     private IDeckLayout mDeckAdapter;
 
     DeckHelperCallback(IDeckLayout deckAdapter) {

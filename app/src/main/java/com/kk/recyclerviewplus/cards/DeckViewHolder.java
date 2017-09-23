@@ -1,6 +1,6 @@
 package com.kk.recyclerviewplus.cards;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.GridLayoutManagerPlus;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.kk.recyclerviewplus.R;
 
-class DeckViewHolder extends RecyclerView.ViewHolder {
+class DeckViewHolder extends GridLayoutManagerPlus.GridViewHolder {
     DeckViewHolder(View view) {
         super(view);
         this.view = view;

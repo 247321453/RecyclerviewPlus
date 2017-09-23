@@ -2,8 +2,8 @@ package com.kk.recyclerviewplus.cards;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper2;
-import android.text.TextUtils;
+import android.support.v7.widget.helper.ItemTouchHelperPlus;
+import android.support.v7.widget.helper.OnItemDragListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +20,21 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
     private int mMainCount = 60, mExtraCount = 15, mSideCount = 15;
     private int mPWidth;
 
-    public DeckAdapter(Context context, RecyclerView recyclerView) {
+    public DeckAdapter(Context context, RecyclerView recyclerView, OnItemDragListener listener) {
         mContext = context;
         mRecyclerView = recyclerView;
         mLayoutInflater = LayoutInflater.from(context);
         recyclerView.addItemDecoration(new DeckItemDecoration(this));
         mDeckLayoutManager = new DeckLayoutManager(getContext(), getLineLimitCount(), this);
         recyclerView.setLayoutManager(mDeckLayoutManager);
-        ItemTouchHelper2 touchHelper = new ItemTouchHelper2(getContext(), new DeckHelperCallback(this));
+
+        DeckHelperCallback deckHelperCallback =  new DeckHelperCallback(this);
+        ItemTouchHelperPlus touchHelper = new ItemTouchHelperPlus(getContext(), deckHelperCallback);
         touchHelper.setEnableClickDrag(true);
         touchHelper.attachToRecyclerView(recyclerView);
+        touchHelper.setItemDragListener(listener);
+        
+        deckHelperCallback.setItemTouchHelper(touchHelper);
     }
 
     public Context getContext() {
