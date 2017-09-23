@@ -4,10 +4,13 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelperPlus;
 import android.support.v7.widget.helper.OnItemDragListener;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kk.recyclerviewplus.BuildConfig;
 import com.kk.recyclerviewplus.R;
 
 public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements IDeckLayout {
@@ -28,12 +31,12 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> implements
         mDeckLayoutManager = new DeckLayoutManager(getContext(), getLineLimitCount(), this);
         recyclerView.setLayoutManager(mDeckLayoutManager);
 
-        DeckHelperCallback deckHelperCallback =  new DeckHelperCallback(this);
+        DeckHelperCallback deckHelperCallback = new DeckHelperCallback(this);
         ItemTouchHelperPlus touchHelper = new ItemTouchHelperPlus(getContext(), deckHelperCallback);
         touchHelper.setEnableClickDrag(true);
         touchHelper.attachToRecyclerView(recyclerView);
         touchHelper.setItemDragListener(listener);
-        
+
         deckHelperCallback.setItemTouchHelper(touchHelper);
     }
 

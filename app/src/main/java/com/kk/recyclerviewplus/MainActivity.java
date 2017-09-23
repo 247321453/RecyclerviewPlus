@@ -1,6 +1,7 @@
 package com.kk.recyclerviewplus;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.OnItemDragListener;
@@ -80,6 +81,14 @@ public class MainActivity extends Activity implements OnItemDragListener {
     @Override
     public void onDragLongPress(int pos) {
         Toast.makeText(this, "on long press :" + pos, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if(getRequestedOrientation()!=newConfig.orientation){
+            mDeckAdapter.notifyDataSetChanged();
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
